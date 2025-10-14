@@ -98,8 +98,13 @@ More complex ensemble models achieved marginal incremental improvements.
 
 ### Visual Results (stored in `results_images/`)
 Representative figures extracted from the notebook:
-![Model performance](result_images/fp_prediction%201.png)
+![Model performance](result_images/fp%20prediction1.png)
 
+Feature importance with Shap Analysis
+![SHAP analysis](result_images/fp%20prediction2.png)
+
+### Deployment:
+![FP Deployment](result_images/fp%deployment.png)
 
 ## 2.  Hotel Recommendation System
 ### Objective:
