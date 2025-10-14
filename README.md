@@ -51,7 +51,7 @@ travel-capstone/
 All projects emphasize **data preprocessing, model development, performance evaluation, and reproducibility** using modular Python scripts, notebooks, and deployment-ready frameworks.
 ---
 
-## 1️⃣ Flight Price Prediction
+## 1️1.  Flight Price Prediction
 
 ### Objective:
 To model and predict commercial flight prices using categorical and temporal variables extracted from flight data.
@@ -98,15 +98,10 @@ More complex ensemble models achieved marginal incremental improvements.
 
 ### Visual Results (stored in `results_images/`)
 Representative figures extracted from the notebook:
-```text
-results_images/Flight_price_prediction_img0.png   # EDA: price distribution
-results_images/Flight_price_prediction_img1.png   # Feature importance plot
-results_images/Flight_price_prediction_img2.png   # Actual vs Predicted prices
-results_images/Flight_price_prediction_img3.png   # Residual diagnostics
-results_images/Flight_price_prediction_img4.png   # Model comparison summary
-```
+![Model performance](result_images/fp_prediction%201.png)
 
-## Hotel Recommendation System
+
+## 2.  Hotel Recommendation System
 ### Objective:
 
 Recommend hotels similar to a selected entry based on textual and categorical attributes.
