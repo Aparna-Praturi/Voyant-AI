@@ -1,8 +1,8 @@
-# **Voyant ML** 
+# **Voyant AI** 
 
 ## Overview
 
-Voyant ML is a unified repository showcasing **end-to-end applied machine learning pipelines** across diverse domains — including::
+Voyant AI is a unified repository showcasing **end-to-end applied machine learning pipelines** across diverse domains — including::
 
 1. **Flight Price Prediction** — supervised regression on structured airline fare data.  
 2. **Hotel Recommendation System** — content-based filtering using textual similarity.  
