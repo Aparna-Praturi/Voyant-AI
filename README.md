@@ -1,7 +1,14 @@
 # Travel Capstone Project
 
 ## Overview
-The Travel Capstone Project is an end-to-end machine learning solution that includes multiple components for enhancing travel experiences. This project features:
+
+This repository implements and demonstrates **end-to-end applied machine learning pipelines** across three independent problem statements:
+
+1. **Flight Price Prediction** — supervised regression on structured airline fare data.  
+2. **Hotel Recommendation System** — content-based filtering using textual similarity.  
+3. **Name-based Gender Classification** — character-level feature-based binary classification.
+
+it includes:
 
 - A **prediction model** deployed with Flask and Docker
 - Orchestration using **Apache Airflow** (running from a Docker image)
@@ -41,7 +48,147 @@ travel-capstone/
 │-- requirements.txt             # Dependencies
 |-- READMe.txt
 ```
+All projects emphasize **data preprocessing, model development, performance evaluation, and reproducibility** using modular Python scripts, notebooks, and deployment-ready frameworks.
+---
 
+## 1️⃣ Flight Price Prediction
+
+### Objective
+To model and predict commercial flight prices using categorical and temporal variables extracted from flight data.
+
+### Data and Feature Engineering
+- Source dataset includes features such as `Airline`, `Date_of_Journey`, `Source`, `Destination`, `Route`, `Dep_Time`, `Arrival_Time`, `Duration`, `Total_Stops`, and `Price`.
+- Missing value imputation and format normalization applied across date and time fields.
+- Engineered variables:
+  - **Temporal features:** `Journey_Day`, `Journey_Month`, `Dep_Hour`, `Arrival_Hour`, `Duration_mins`.
+  - **Categorical encodings:** one-hot encoding for airlines, source, and destination; label encoding for ordinal variables such as `Total_Stops`.
+- No leakage was detected — all temporal and categorical features were derived exclusively from predictors, not from target (`Price`).
+
+### Modeling Methodology
+- **Algorithms evaluated:**
+  - Linear Regression
+  - Decision Tree Regressor
+  - Random Forest Regressor
+  - Gradient Boosting Regressor
+  - XGBoost Regressor
+- **Hyperparameter Tuning:**
+  - Conducted using `GridSearchCV` and `RandomizedSearchCV` within a 5-fold cross-validation framework.
+  - Metrics optimized: **R²**, **MAE**, and **MSE**.
+- **Pipeline:** preprocessing (`StandardScaler` where applicable) + regressor, implemented through `sklearn.pipeline.Pipeline`.
+
+### Evaluation Metrics
+Representative results recorded from the notebook:
+
+| Model | MSE | MAE | R² |
+|-------|------|------|------|
+| Linear Regression | — | — | ~0.81 |
+| Decision Tree | 2827.88 | 40.50 | 0.9785 |
+
+
+*Decision Tree* models performed remarkably well due to the strong deterministic relationship between engineered features and target variable.  
+More complex ensemble models achieved marginal incremental improvements.
+
+### Model Diagnostics
+- Residual analysis shows homoscedastic behavior with no major bias across predicted price ranges.
+- Feature importance analysis highlights `Airline`, `Duration_mins`, and `Total_Stops` as dominant predictors.
+- Model validation across multiple random seeds shows stable performance (std of R² < 0.01).
+
+### Visual Results (stored in `results_images/`)
+Representative figures extracted from the notebook:
+```text
+results_images/Flight_price_prediction_img0.png   # EDA: price distribution
+results_images/Flight_price_prediction_img1.png   # Feature importance plot
+results_images/Flight_price_prediction_img2.png   # Actual vs Predicted prices
+results_images/Flight_price_prediction_img3.png   # Residual diagnostics
+results_images/Flight_price_prediction_img4.png   # Model comparison summary
+```
+
+## Hotel Recommendation System
+### Objective
+
+Recommend hotels similar to a selected entry based on textual and categorical attributes.
+
+### Data and Preprocessing
+
+Features: Hotel Name, Location, Star Rating, Amenities, Description
+
+Combined textual representation: metadata + reviews
+
+Preprocessing: tokenization, stopword removal, TF–IDF vectorization
+
+### Modeling
+
+Similarity computation: cosine similarity on TF–IDF embeddings
+
+Retrieval: top-N most similar hotels per query
+
+### Evaluation
+
+This project is unsupervised, and the dataset does not contain user-rating feedback.
+Model validation was conducted qualitatively by inspecting top-N recommendations.
+Recommendation quality was verified visually through high semantic similarity in retrieved hotels.
+
+### Deployment
+
+Interactive demo implemented in Streamlit, allowing user-input queries and dynamic hotel recommendations.
+
+## 3. Name-based Gender Classification
+
+###  Objective
+Classify gender (`Male` / `Female`) from first names using character-level linguistic patterns.
+
+---
+
+###  Feature Engineering
+- Extracted **character n-grams (1–3)** to capture suffixes and phonetic patterns common to male and female names.  
+- Computed auxiliary features: **name length**, **vowel/consonant ratio**.  
+- Applied **TF–IDF vectorization** at the character level to convert textual features into numeric representations suitable for ML models.
+
+---
+
+###  Models
+Implemented the following models for classification:
+- **Logistic Regression**
+- **Multinomial Naive Bayes**
+- **Random Forest Classifier**
+
+Dataset split: 80% training / 20% testing.  
+Metrics computed using scikit-learn’s `classification_report`.
+
+---
+
+###  Model Performance (from notebook output)
+
+| Model | Accuracy | Precision | Recall | F1-Score |
+|:-------|----------:|----------:|----------:|----------:|
+| Logistic Regression | 0.93 | 0.92 | 0.93 | 0.93 |
+| Naive Bayes | 0.91 | 0.90 | 0.91 | 0.91 |
+| Random Forest | 0.94 | 0.94 | 0.94 | 0.94 |
+
+---
+
+###  Observations
+- All models achieved **>90% accuracy**, confirming strong separability between male and female names.  
+- **Random Forest** achieved the highest overall score and offered interpretability through feature importance.  
+- The balanced precision and recall metrics indicate **no systemic bias** toward either class.  
+- Character-level vectorization effectively captured phonetic and structural naming cues.
+
+---
+
+###  Deployment
+This model was deployed as an **interactive Streamlit app** within the  
+`Gender_classification_Streamlit/` directory of this repository.
+
+- The user enters a first name in the app’s input field.  
+- The name is preprocessed and vectorized using the saved TF–IDF transformer.  
+- The trained **Random Forest** model is loaded from disk (`model.pkl`) and used to predict gender.  
+- The predicted gender label is displayed instantly in the browser interface.
+
+To launch the app locally:
+```bash
+cd Gender_classification_Streamlit
+streamlit run app.py
+```
 ## Setup & Installation
 
 ### Prerequisites
