@@ -53,10 +53,10 @@ All projects emphasize **data preprocessing, model development, performance eval
 
 ## 1️⃣ Flight Price Prediction
 
-### Objective
+### Objective:
 To model and predict commercial flight prices using categorical and temporal variables extracted from flight data.
 
-### Data and Feature Engineering
+### Data and Feature Engineering:
 - Source dataset includes features such as `Airline`, `Date_of_Journey`, `Source`, `Destination`, `Route`, `Dep_Time`, `Arrival_Time`, `Duration`, `Total_Stops`, and `Price`.
 - Missing value imputation and format normalization applied across date and time fields.
 - Engineered variables:
@@ -64,19 +64,18 @@ To model and predict commercial flight prices using categorical and temporal var
   - **Categorical encodings:** one-hot encoding for airlines, source, and destination; label encoding for ordinal variables such as `Total_Stops`.
 - No leakage was detected — all temporal and categorical features were derived exclusively from predictors, not from target (`Price`).
 
-### Modeling Methodology
+### Modeling Methodology:
 - **Algorithms evaluated:**
   - Linear Regression
+  - Ridge Regression
   - Decision Tree Regressor
-  - Random Forest Regressor
-  - Gradient Boosting Regressor
-  - XGBoost Regressor
+
 - **Hyperparameter Tuning:**
   - Conducted using `GridSearchCV` and `RandomizedSearchCV` within a 5-fold cross-validation framework.
   - Metrics optimized: **R²**, **MAE**, and **MSE**.
 - **Pipeline:** preprocessing (`StandardScaler` where applicable) + regressor, implemented through `sklearn.pipeline.Pipeline`.
 
-### Evaluation Metrics
+### Evaluation Metrics:
 Representative results recorded from the notebook:
 
 | Model                        | Train MSE  | Test MSE  | Train MAE     | Test MAE      | Train R²  | Test R²  |
@@ -92,7 +91,7 @@ Representative results recorded from the notebook:
 *Decision Tree* models performed remarkably well due to the strong deterministic relationship between engineered features and target variable.  
 More complex ensemble models achieved marginal incremental improvements.
 
-### Model Diagnostics
+### Model Diagnostics:
 - Residual analysis shows homoscedastic behavior with no major bias across predicted price ranges.
 - Feature importance analysis highlights `Airline`, `Duration_mins`, and `Total_Stops` as dominant predictors.
 - Model validation across multiple random seeds shows stable performance (std of R² < 0.01).
@@ -108,31 +107,31 @@ results_images/Flight_price_prediction_img4.png   # Model comparison summary
 ```
 
 ## Hotel Recommendation System
-### Objective
+### Objective:
 
 Recommend hotels similar to a selected entry based on textual and categorical attributes.
 
-### Data and Preprocessing
+### Data and Preprocessing:
 
 Features: Hotel Name, Location, Star Rating, Amenities, Description
 
-Combined textual representation: metadata + reviews
+
 
 Preprocessing: tokenization, stopword removal, TF–IDF vectorization
 
-### Modeling
+### Modeling:
 
 Similarity computation: cosine similarity on TF–IDF embeddings
 
 Retrieval: top-N most similar hotels per query
 
-### Evaluation
+### Evaluation:
 
 This project is unsupervised, and the dataset does not contain user-rating feedback.
 Model validation was conducted qualitatively by inspecting top-N recommendations.
 Recommendation quality was verified visually through high semantic similarity in retrieved hotels.
 
-### Deployment
+### Deployment:
 
 Interactive demo implemented in Streamlit, allowing user-input queries and dynamic hotel recommendations.
 
@@ -143,14 +142,20 @@ Classify gender (`Male` / `Female`) from first names using character-level lingu
 
 ---
 
-###  Feature Engineering
-- Extracted **character n-grams (1–3)** to capture suffixes and phonetic patterns common to male and female names.  
-- Computed auxiliary features: **name length**, **vowel/consonant ratio**.  
-- Applied **TF–IDF vectorization** at the character level to convert textual features into numeric representations suitable for ML models.
+###  Feature Engineering:
+
+A gender predictor based on name has been succesfully built based on Random Forest classifier with an accuracy of about 90%. The important steps used in the process are:
+
+- Separtion of firstname and lastname.
+- checking whether firstname starts or ends with a vowel.
+- creating character n-grams and vectorising using TF-IDF.
+- After the above preprocessing, steps, various classifiers have been tested and RandomForest was chosen and hyper-parameter tuned.
+
+The resulting classifier predicts gender based on name with an accuracy and f1 score of about 0.89.
 
 ---
 
-###  Models
+###  Models:
 Implemented the following models for classification:
 - **Logistic Regression**
 - **Multinomial Naive Bayes**
@@ -161,7 +166,7 @@ Metrics computed using scikit-learn’s `classification_report`.
 
 ---
 
-###  Model Performance (from notebook output)
+###  Model Performance (from notebook output):
 
 | Model | Accuracy | Precision | Recall | F1-Score |
 |:-------|----------:|----------:|----------:|----------:|
@@ -171,7 +176,7 @@ Metrics computed using scikit-learn’s `classification_report`.
 
 ---
 
-###  Observations
+###  Observations:
 - All models achieved **>90% accuracy**, confirming strong separability between male and female names.  
 - **Random Forest** achieved the highest overall score and offered interpretability through feature importance.  
 - The balanced precision and recall metrics indicate **no systemic bias** toward either class.  
@@ -179,7 +184,7 @@ Metrics computed using scikit-learn’s `classification_report`.
 
 ---
 
-###  Deployment
+###  Deployment:
 This model was deployed as an **interactive Streamlit app** within the  
 `Gender_classification_Streamlit/` directory of this repository.
 
