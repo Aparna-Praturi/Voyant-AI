@@ -79,10 +79,14 @@ To model and predict commercial flight prices using categorical and temporal var
 ### Evaluation Metrics
 Representative results recorded from the notebook:
 
-| Model | MSE | MAE | R² |
-|-------|------|------|------|
-| Linear Regression | — | — | ~0.81 |
-| Decision Tree | 2827.88 | 40.50 | 0.9785 |
+| Model                        | Train MSE  | Test MSE  | Train MAE     | Test MAE      | Train R²  | Test R²  |
+|-------------------------------|------------|-----------|---------------|---------------|-----------|----------|
+| Linear Regression             | 81.097429  | 80.952965 | 10594.059449  | 10568.550203  | 0.919209  | 0.919744 |
+| Ridge Regression              | 81.097404  | 80.952938 | 10594.059451  | 10568.549621  | 0.919209  | 0.919744 |
+| Decision Tree                 | 40.599290  | 40.497364 | 2816.541939   | 2827.883993   | 0.978521  | 0.978525 |
+| Decision Tree (tuned)         | 31.422014  | 31.378785 | 1563.372421   | 1559.630043   | 0.988078  | 0.988156 |
+
+
 
 
 *Decision Tree* models performed remarkably well due to the strong deterministic relationship between engineered features and target variable.  
