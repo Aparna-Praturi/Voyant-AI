@@ -1,12 +1,14 @@
-# Travel Capstone Project
+# **Voyant ML** 
 
 ## Overview
 
-This repository implements and demonstrates **end-to-end applied machine learning pipelines** across three independent problem statements:
+Voyant ML is a unified repository showcasing **end-to-end applied machine learning pipelines** across diverse domains — including::
 
 1. **Flight Price Prediction** — supervised regression on structured airline fare data.  
 2. **Hotel Recommendation System** — content-based filtering using textual similarity.  
 3. **Name-based Gender Classification** — character-level feature-based binary classification.
+
+All projects emphasize **data preprocessing, model development, performance evaluation, and reproducibility** using modular Python scripts, notebooks, and deployment-ready frameworks.
 
 it includes:
 
@@ -48,7 +50,7 @@ travel-capstone/
 │-- requirements.txt             # Dependencies
 |-- READMe.txt
 ```
-All projects emphasize **data preprocessing, model development, performance evaluation, and reproducibility** using modular Python scripts, notebooks, and deployment-ready frameworks.
+
 ---
 
 ## 1️1.  Flight Price Prediction
@@ -104,7 +106,10 @@ Feature importance with Shap Analysis
 ![SHAP analysis](result_images/fp%20prediction2.png)
 
 ### Deployment:
-![FP Deployment](result_images/fp%deployment.png)
+![FP Deployment](result_images/fp%20deployment.png)
+
+Airflow DAGs:
+![FP Deployment](result_images/airflow%20deployment.png)
 
 ## 2.  Hotel Recommendation System
 ### Objective:
@@ -115,9 +120,7 @@ Recommend hotels similar to a selected entry based on textual and categorical at
 
 Features: Hotel Name, Location, Star Rating, Amenities, Description
 
-
-
-Preprocessing: tokenization, stopword removal, TF–IDF vectorization
+Preprocessing: tokenization, stopword removal, TF–IDF vectorization, collaborative filtering using cosine similarity
 
 ### Modeling:
 
@@ -131,9 +134,12 @@ This project is unsupervised, and the dataset does not contain user-rating feedb
 Model validation was conducted qualitatively by inspecting top-N recommendations.
 Recommendation quality was verified visually through high semantic similarity in retrieved hotels.
 
+![Example result](result_images/hr1.png)
+
 ### Deployment:
 
 Interactive demo implemented in Streamlit, allowing user-input queries and dynamic hotel recommendations.
+![Example result](result_images/hr%20deployment%20merged.png)
 
 ## 3. Name-based Gender Classification
 
@@ -174,6 +180,7 @@ Metrics computed using scikit-learn’s `classification_report`.
 | Naive Bayes | 0.91 | 0.90 | 0.91 | 0.91 |
 | Random Forest | 0.94 | 0.94 | 0.94 | 0.94 |
 
+![Example result](result_images/name%20prediction1.png)
 ---
 
 ###  Observations:
@@ -188,16 +195,9 @@ Metrics computed using scikit-learn’s `classification_report`.
 This model was deployed as an **interactive Streamlit app** within the  
 `Gender_classification_Streamlit/` directory of this repository.
 
-- The user enters a first name in the app’s input field.  
-- The name is preprocessed and vectorized using the saved TF–IDF transformer.  
-- The trained **Random Forest** model is loaded from disk (`model.pkl`) and used to predict gender.  
-- The predicted gender label is displayed instantly in the browser interface.
 
-To launch the app locally:
-```bash
-cd Gender_classification_Streamlit
-streamlit run app.py
-```
+![Example result](result_images/gp%20deployment.png)
+
 ## Setup & Installation
 
 ### Prerequisites
@@ -279,8 +279,14 @@ streamlit run Hotel_recommendation_Streamlit\hotel_app.py
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## Contact
-For any queries, reach out at: **your.email@example.com**
+👩‍💻 Author
+
+Aparna Praturi, Ph.D.
+
+Data Scientist and researcher specializing in applied AI, distributed ML systems, and production-scale model deployment.
+📫 LinkedIn: www.linkedin.com/in/aparna-praturi
+🔬 Focus: MLOps, model optimization, and explainable AI
+
 
 
 
