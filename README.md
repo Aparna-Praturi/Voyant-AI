@@ -282,10 +282,13 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 👩‍💻 Author
 
 Aparna Praturi, Ph.D.
-
 Data Scientist and researcher specializing in applied AI, distributed ML systems, and production-scale model deployment.
-📫 LinkedIn: www.linkedin.com/in/aparna-praturi
-🔬 Focus: MLOps, model optimization, and explainable AI
+
+🔗 Connect with me:  
+- [GitHub](https://github.com/Aparna-Praturi)  
+- [LinkedIn](https://www.linkedin.com/in/aparna-praturi/)  
+- [Email](mailto:aparnaps777@gmail.com)
+
 
 
 
