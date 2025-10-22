@@ -53,7 +53,7 @@ travel-capstone/
 
 ---
 
-## 1️1.  Flight Price Prediction
+## 1.  Flight Price Prediction
 
 ### Objective:
 To model and predict commercial flight prices using categorical and temporal variables extracted from flight data.
